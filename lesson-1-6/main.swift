@@ -28,13 +28,15 @@ class Parking: CustomStringConvertible {
 // Арена для персонажей
 class Arena: CustomStringConvertible {
     var nameCharacter: String
+    var lavel: Int
     var arenaNumber = Int.random(in: 1..<10)
     
-    init(nameCharacter: String) {
+    init(nameCharacter: String, lavel: Int) {
         self.nameCharacter = nameCharacter
+        self.lavel = lavel
     }
     var description: String {
-        return "Персонаж \(nameCharacter) занял арену №\(arenaNumber)"
+        return "Персонаж \(nameCharacter) с уровнем \(lavel) занял арену №\(arenaNumber)"
     }
 }
 
@@ -55,31 +57,58 @@ extension Queue: CustomStringConvertible {
      var description: String {
         return elemments.isEmpty ? "Очередь пуста" : "Очередь: \(elemments)"
      }
+    
+    func myFilter(predicate:(T) -> Bool) -> [T] {
+        var result = [T]()
+        
+        for i in elemments {
+            if predicate(i) {
+                result.append(i)
+            }
+        }
+        return result
+    }
  }
 
 
 var parkingCar = Queue<Parking>()
 var сharacterArena = Queue<Arena>()
 
-//сharacterArena.push(Arena(nameCharacter: "Konnon"))
-//сharacterArena.push(Arena(nameCharacter: "Ragnar"))
-//сharacterArena.push(Arena(nameCharacter: "Anny"))
-//print(сharacterArena)
-//
-//let elementCharacter1 = сharacterArena.pop()
-//print(сharacterArena)
+сharacterArena.push(Arena(nameCharacter: "Konnon", lavel: 76))
+сharacterArena.push(Arena(nameCharacter: "Ragnar", lavel: 76))
+сharacterArena.push(Arena(nameCharacter: "Anny", lavel: 76))
+сharacterArena.push(Arena(nameCharacter: "Viking", lavel: 76))
+сharacterArena.push(Arena(nameCharacter: "Salam", lavel: 76))
+сharacterArena.push(Arena(nameCharacter: "Krot", lavel: 76))
+сharacterArena.push(Arena(nameCharacter: "VinDizel", lavel: 76))
+сharacterArena.push(Arena(nameCharacter: "Neo", lavel: 76))
+сharacterArena.push(Arena(nameCharacter: "Gendalf", lavel: 76))
+print(сharacterArena)
+
+let elemmentCharacter1 = сharacterArena.pop()
+print(сharacterArena)
+
+
+let honoursPupil = сharacterArena.myFilter(predicate: {$0.arenaNumber == 3})
+print(honoursPupil)
 
 parkingCar.push(Parking(paidForParking: 100))
 parkingCar.push(Parking(paidForParking: 200))
 parkingCar.push(Parking(paidForParking: 300))
+parkingCar.push(Parking(paidForParking: 100))
+parkingCar.push(Parking(paidForParking: 100))
+parkingCar.push(Parking(paidForParking: 300))
+parkingCar.push(Parking(paidForParking: 100))
+parkingCar.push(Parking(paidForParking: 100))
+parkingCar.push(Parking(paidForParking: 300))
 print(parkingCar)
 
-let elementCar1 = parkingCar.pop()
-let elementCar2 = parkingCar.pop()
-let elementCar3 = parkingCar.pop()
+let elemmentCar1 = parkingCar.pop()
+let elemmentCar2 = parkingCar.pop()
+let elemmentCar3 = parkingCar.pop()
 print(parkingCar)
 
+let honoursPupil1 = parkingCar.myFilter(predicate: {$0.paidForParking == 100})
+print(honoursPupil1)
 
-
-//print(randonNumber())
 
